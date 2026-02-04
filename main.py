@@ -49,8 +49,8 @@ def create_reference():
             current_status,
             product_variant,
             case 
-              when current_status = "buyout installment" then "buyout_installment" 
-              when current_status in ("Active","Upgrade") then "subscription_payment"
+              when current_status = "Suspsended" then "Terminated" 
+              when current_status in ("Active") then "subscription_payment"
                 else null
             end as payment_category,
             "card_charge" as gateway,
@@ -60,8 +60,8 @@ def create_reference():
 
 
 
-        from `dna-staging-test.RPG.Upcoming_Payments`
-        where current_status in ('Active','buyout installment','Upgrade')
+        from `dna-staging-test.rentoza_drive.upcoming_payments`
+        where current_status in ('Active','Suspended','Terminated')
         and next_payment_date = current_date()
         
         
